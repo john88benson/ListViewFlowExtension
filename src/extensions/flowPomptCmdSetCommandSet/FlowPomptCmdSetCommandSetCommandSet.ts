@@ -44,7 +44,7 @@ export default class FlowPomptCmdSetCommandSetCommandSet extends BaseListViewCom
     if (event.selectedRows.length > 0) {
       fileUrl = event.selectedRows[0].getValueByName("FileRef");
       sourceUrl = fileUrl.replace(siteCollection, "");
-      fullFile = event.selectedRows[0].getValueByName("FileLeafRef")
+      fullFile = event.selectedRows[0].getValueByName("FileLeafRef");
       fileName = event.selectedRows[0].getValueByName("FileName");
       docExt = event.selectedRows[0].getValueByName("File_x0020_Type");
       docExt = `.${docExt}`;
@@ -68,7 +68,7 @@ export default class FlowPomptCmdSetCommandSetCommandSet extends BaseListViewCom
     const submiter: string = this.context.pageContext.user.loginName;
 
     //const destSite: string = "https://m365x244049.sharepoint.com/sites/DRCStaff";
-    const destSite: string = "https://jhpiego.sharepoint.com/sites/onejhpiego-library"
+    const destSite: string = "https://jhpiego.sharepoint.com/sites/onejhpiego-library";
     const destFlolder: string = "/Shared Documents";
 
     const body: string = JSON.stringify({
