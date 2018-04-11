@@ -1,0 +1,8 @@
+{
+  "@microsoft/generator-sharepoint": {
+    "version": "1.4.1",
+    "libraryName": "flow-pompt-cmd-set",
+    "libraryId": "ad4fca1a-33ab-474b-9682-fb93b6328849",
+    "environment": "spo"
+  }
+}
