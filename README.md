@@ -1,26 +1,7 @@
 ## flow-pompt-cmd-set
 
-This is where you include your WebPart documentation.
+### Debug URL Content Curation
+?loadSpfx=true&debugManifestsFile=https://localhost:4321/temp/manifests.js&customActions={"4db1937b-cb36-44ba-9ef9-3346ae9d6be2":{"location":"ClientSideExtension.ListViewCommandSet.ContextMenu","properties":{"sampleTextOne":"One item is selected in the list."}}}
 
-### Building the code
 
-```bash
-git clone the repo
-npm i
-npm i -g gulp
-gulp
-```
 
-This package produces the following:
-
-* lib/* - intermediate-stage commonjs build artifacts
-* dist/* - the bundled script, along with other resources
-* deploy/* - all resources which should be uploaded to a CDN.
-
-### Build options
-
-gulp clean - TODO
-gulp test - TODO
-gulp serve - TODO
-gulp bundle - TODO
-gulp package-solution - TODO

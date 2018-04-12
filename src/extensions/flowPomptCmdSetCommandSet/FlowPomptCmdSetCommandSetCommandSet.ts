@@ -53,8 +53,8 @@ export default class FlowPomptCmdSetCommandSetCommandSet extends BaseListViewCom
 
     switch (event.itemId) {
       case 'COMMAND_1':
-        Dialog.alert(`Attention, ${fullFile} will be moved to the OneJhpiego Library.`);
         this.flowPostRequest(siteUrl, sourceUrl, folder, fileName, docExt);
+        Dialog.alert(`Attention, ${fullFile} will be moved to the OneJhpiego Library.`);
         break;
       default:
         throw new Error('Unknown command');
@@ -98,6 +98,8 @@ export default class FlowPomptCmdSetCommandSetCommandSet extends BaseListViewCom
             // Access properties of the response object. 
             console.log(`Status code: ${response.status}`);
             console.log(`Status text: ${response.statusText}`);
+            
+            window.location.reload();
             //response.json() returns a promise so you get access to the json in the resolve callback.
             response.json().then((responseJSON: JSON) => {
                 console.log(responseJSON);
