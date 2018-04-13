@@ -53,8 +53,13 @@ export default class FlowPomptCmdSetCommandSetCommandSet extends BaseListViewCom
 
     switch (event.itemId) {
       case 'COMMAND_1':
-        this.flowPostRequest(siteUrl, sourceUrl, folder, fileName, docExt);
-        Dialog.alert(`Attention, ${fullFile} will be moved to the OneJhpiego Library.`);
+        if (docExt == ".url") {
+          Dialog.alert(`Attention, URL Links cannot be moved to the OneJhpiego Library.`);
+        }
+        else {
+          Dialog.alert(`Attention, ${fullFile} will be moved to the OneJhpiego Library.  You will be notified via email when complete`);
+          this.flowPostRequest(siteUrl, sourceUrl, folder, fileName, docExt);
+        }
         break;
       default:
         throw new Error('Unknown command');
@@ -72,39 +77,37 @@ export default class FlowPomptCmdSetCommandSetCommandSet extends BaseListViewCom
     const destFlolder: string = "/Shared Documents";
 
     const body: string = JSON.stringify({
-        "siteUrl": `${siteUrl}`,
-        "sourceUrl": `${sourceUrl}`,
-        "sourceFolder": `${folder}`,
-        "destSite": `${destSite}`,
-        "destFolder": `${destFlolder}`,
-        "docName": `${fileName}`,
-        "docExt": `${docExt}`,
-        "submiter": `${submiter}`
+      "siteUrl": `${siteUrl}`,
+      "sourceUrl": `${sourceUrl}`,
+      "sourceFolder": `${folder}`,
+      "destSite": `${destSite}`,
+      "destFolder": `${destFlolder}`,
+      "docName": `${fileName}`,
+      "docExt": `${docExt}`,
+      "submiter": `${submiter}`
     });
 
     const requestHeaders: Headers = new Headers();
     requestHeaders.append('Content-type', 'application/json');
 
     const httpClientOptions: IHttpClientOptions = {
-        body: body,
-        headers: requestHeaders
+      body: body,
+      headers: requestHeaders
     };
 
     this.context.httpClient.post(
-        postURL,
-        HttpClient.configurations.v1,
-        httpClientOptions)
-        .then((response: HttpClientResponse) => {
-            // Access properties of the response object. 
-            console.log(`Status code: ${response.status}`);
-            console.log(`Status text: ${response.statusText}`);
-            
-            window.location.reload();
-            //response.json() returns a promise so you get access to the json in the resolve callback.
-            response.json().then((responseJSON: JSON) => {
-                console.log(responseJSON);
-            });
+      postURL,
+      HttpClient.configurations.v1,
+      httpClientOptions)
+      .then((response: HttpClientResponse) => {
+        // Access properties of the response object. 
+        console.log(`Status code: ${response.status}`);
+        console.log(`Status text: ${response.statusText}`);
+        //response.json() returns a promise so you get access to the json in the resolve callback.
+        response.json().then((responseJSON: JSON) => {
+          console.log(responseJSON);
         });
+      });
 
-}
+  }
 }
