@@ -3,7 +3,7 @@
   "solution": {
     "name": "flow-pompt-cmd-set-client-side-solution",
     "id": "ad4fca1a-33ab-474b-9682-fb93b6328849",
-    "version": "1.0.0.0",
+    "version": "1.0.0.1",
     "includeClientSideAssets": true,
     "features": [
       {
