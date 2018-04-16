@@ -35,9 +35,8 @@ export default class FlowPomptCmdSetCommandSetCommandSet extends BaseListViewCom
   public onListViewUpdated(event: IListViewCommandSetListViewUpdatedParameters): void {
     const command: Command | undefined = this.tryGetCommand("COMMAND_1")
     if(command){
-      console.log("SPPermission: " + SPPermission.editListItems);
+      //console.log("SPPermission: " + SPPermission.editListItems);
       command.visible = event.selectedRows.length >= 1 && this.context.pageContext.list.permissions.hasPermission(SPPermission.editListItems);
-      console.log("HAI OH!")
     }
   }
 
