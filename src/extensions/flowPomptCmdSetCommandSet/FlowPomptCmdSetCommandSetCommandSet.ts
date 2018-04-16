@@ -10,6 +10,7 @@ import { Dialog } from '@microsoft/sp-dialog';
 
 import * as strings from 'FlowPomptCmdSetCommandSetCommandSetStrings';
 import SPHttpClientResponse, { HttpClient, IHttpClientOptions, HttpClientResponse } from '@microsoft/sp-http';
+import { SPPermission } from "@microsoft/sp-page-context";;
 /**
  * If your command set uses the ClientSideComponentProperties JSON input,
  * it will be deserialized into the BaseExtension.properties object.
@@ -28,6 +29,16 @@ export default class FlowPomptCmdSetCommandSetCommandSet extends BaseListViewCom
   public onInit(): Promise<void> {
     Log.info(LOG_SOURCE, 'Initialized FlowPomptCmdSetCommandSetCommandSet');
     return Promise.resolve();
+  }
+
+  @override
+  public onListViewUpdated(event: IListViewCommandSetListViewUpdatedParameters): void {
+    const command: Command | undefined = this.tryGetCommand("COMMAND_1")
+    if(command){
+      console.log("SPPermission: " + SPPermission.editListItems);
+      command.visible = event.selectedRows.length >= 1 && this.context.pageContext.list.permissions.hasPermission(SPPermission.editListItems);
+      console.log("HAI OH!")
+    }
   }
 
   @override
@@ -57,7 +68,7 @@ export default class FlowPomptCmdSetCommandSetCommandSet extends BaseListViewCom
           Dialog.alert(`Attention, URL Links cannot be moved to the OneJhpiego Library.`);
         }
         else {
-          Dialog.alert(`Attention, ${fullFile} will be moved to the OneJhpiego Library.  You will be notified via email when complete`);
+          Dialog.alert(`Attention, ${fullFile} will be moved to the OneJhpiego Library.  You will be notified via email when complete, you can then refresh your page to see changes.`);
           this.flowPostRequest(siteUrl, sourceUrl, folder, fileName, docExt);
         }
         break;
