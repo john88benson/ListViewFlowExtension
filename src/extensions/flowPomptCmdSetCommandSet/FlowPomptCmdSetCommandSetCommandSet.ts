@@ -7,6 +7,7 @@ import {
   IListViewCommandSetExecuteEventParameters
 } from '@microsoft/sp-listview-extensibility';
 import { Dialog } from '@microsoft/sp-dialog';
+import OkayDialog from './NotificationDialog';
 
 import * as strings from 'FlowPomptCmdSetCommandSetCommandSetStrings';
 import SPHttpClientResponse, { HttpClient, IHttpClientOptions, HttpClientResponse } from '@microsoft/sp-http';
@@ -67,7 +68,9 @@ export default class FlowPomptCmdSetCommandSetCommandSet extends BaseListViewCom
           Dialog.alert(`Attention, URL Links cannot be moved to the OneJhpiego Library.`);
         }
         else {
-          Dialog.alert(`Attention, ${fullFile} will be moved to the OneJhpiego Library.  You will be notified via email when complete, you can then refresh your page to see changes.`);
+          const dialog: OkayDialog = new OkayDialog();
+          dialog.message=`${fullFile}  has been moved to the OneJhpiego Library. A link will be added to your library.  You will be notified by email when the process is complete. You can then refresh your page to see the link.`;
+          dialog.show();
           this.flowPostRequest(siteUrl, sourceUrl, folder, fileName, docExt);
         }
         break;
